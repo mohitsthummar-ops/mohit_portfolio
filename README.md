@@ -12,8 +12,8 @@ Professional portfolio website showcasing Web Development (MERN, PHP) and Data A
 ### 2. Render
 *   Create a new **Static Site** on Render.
 *   Connect your GitHub repository.
-*   Set **Build Command** to: `npm install` (optional for static).
 *   Set **Publish Directory** to: `./` (root).
+*   Render will deploy your site instantly.
 
 ### 3. GitHub Pages
 *   Go to your Repository Settings > Pages.
