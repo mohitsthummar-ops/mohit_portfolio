@@ -1146,3 +1146,96 @@ section {
         transform: rotate(360deg);
     }
 }
+
+/* =========================================
+   Mobile Responsiveness
+   ========================================= */
+@media (max-width: 768px) {
+    body {
+        zoom: 1; /* Reset zoom on mobile to prevent extreme scaling */
+        font-size: 16px;
+    }
+    
+    .vignette {
+        background-size: cover; /* Fix half page background issue */
+    }
+    
+    .cursor, .cursor-follower {
+        display: none !important; /* Touch devices don't need custom cursors */
+    }
+
+    .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+    
+    .hero-btns {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .nav-links {
+        display: none; /* Hide navigation links on small screens to save space */
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .work-grid .work-card:nth-child(3n+1) {
+        grid-column: span 1;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 24px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-grid {
+        padding-left: 20px;
+    }
+
+    .process-track-line {
+        left: 20px;
+    }
+
+    .contact-methods-grid {
+        flex-direction: column;
+    }
+
+    .contact-card-v2 {
+        padding: 40px 24px;
+    }
+    
+    .contact-footer-info {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+    .hero {
+        padding: 120px 20px 60px;
+    }
+}

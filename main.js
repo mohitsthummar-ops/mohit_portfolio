@@ -4,8 +4,8 @@ $(document).ready(function() {
     const follower = $('.cursor-follower');
 
     $(document).on('mousemove', function(e) {
-        // Adjust for body zoom level to keep cursor aligned
-        const zoom = 0.61;
+        // Adjust for body zoom level to keep cursor aligned (zoom is 1 on mobile)
+        const zoom = window.innerWidth > 768 ? 0.61 : 1;
         const x = e.clientX / zoom;
         const y = e.clientY / zoom;
         
