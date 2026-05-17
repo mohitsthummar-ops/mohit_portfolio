@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohit Thummar - Resume</title>
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --secondary: #4A4A4A;
+            --border: #E5E7EB;
+            --bg: #FFFFFF;
+            --accent: #000000;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            background: #F9FAFB;
+        }
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .header h2 {
+            font-size: 18px;
+            color: var(--secondary);
+            margin: 0 0 15px 0;
+            font-weight: 500;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--secondary);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+        p {
+            margin: 0 0 10px 0;
+            color: var(--secondary);
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--secondary);
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .job-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+        }
+        .job-company {
+            font-style: italic;
+            color: var(--secondary);
+        }
+        .project-title {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .project-meta {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--secondary);
+        }
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 0 auto 40px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+
+    <div class="resume-container">
+        <div class="header">
+            <h1>MOHIT THUMMAR</h1>
+            <h2>Full Stack Developer & Data Analyst</h2>
+            <div class="contact-info">
+                <span>📍 Gujarat, India</span>
+                <span>📧 mohitsthummar@gmail.com</span>
+                <span>📞 9979577104</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Professional Summary</h3>
+            <p>Dynamic and detail-oriented Full Stack Developer and Data Analyst with a passion for building scalable web applications and extracting actionable insights from complex datasets. Expert in MERN stack, PHP/Tailwind, and Power BI visualization.</p>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Technical Skills</h3>
+            <ul>
+                <li><strong>Web Development:</strong> MERN Stack (MongoDB, Express, React, Node), PHP, Tailwind CSS, jQuery, HTML5, CSS3, JavaScript.</li>
+                <li><strong>Data Analytics:</strong> Power BI, Data Visualization, SQL, Python, Pandas, Data Mining.</li>
+                <li><strong>Tools & Platforms:</strong> Git, Vercel, MySQL, REST APIs.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Experience</h3>
+            <div style="margin-bottom: 15px;">
+                <div class="job-title">Data Science Intern</div>
+                <div class="job-company">Prodigy InfoTech</div>
+                <ul style="margin-top: 5px;">
+                    <li>Leveraged Python and machine learning libraries to analyze large datasets and identify key business trends.</li>
+                    <li>Developed predictive models to optimize operational efficiency and data accuracy.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="job-title">Data Science Intern</div>
+                <div class="job-company">Sysslan IT Solutions</div>
+                <ul style="margin-top: 5px;">
+                    <li>Collaborated on data-driven projects to provide strategic insights for client growth.</li>
+                    <li>Built interactive dashboards to visualize complex data points for stakeholder reviews.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Key Projects</h3>
+            <div style="margin-bottom: 15px;">
+                <span class="project-title">Ads Agency Portal (MERN Stack)</span> <br>
+                <span class="project-meta">Live: <a href="https://ad-agency-portal.vercel.app/" target="_blank">https://ad-agency-portal.vercel.app/</a></span>
+                <ul style="margin-top: 5px;">
+                    <li>Full-stack portal for campaign management with real-time analytics and client-side dashboards.</li>
+                </ul>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <span class="project-title">Online Bus Reservation System (PHP & Tailwind)</span>
+                <ul style="margin-top: 5px;">
+                    <li>Developed a scalable, user-friendly transit booking platform for students, featuring real-time seat availability.</li>
+                </ul>
+            </div>
+            <div>
+                <span class="project-title">Enterprise Intelligence Dashboards (Power BI)</span>
+                <ul style="margin-top: 5px;">
+                    <li><strong>Automotive Sales Dashboard:</strong> Market share and sales performance analysis.</li>
+                    <li><strong>MacDonald's Sales Dashboard:</strong> Regional operational growth optimization.</li>
+                    <li><strong>Reliance Enterprise Insights:</strong> Strategic financial tracking and portfolio analysis.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Education</h3>
+            <p><em>Relevant Coursework in Computer Science and Data Analytics.</em></p>
+        </div>
+    </div>
+
+</body>
+</html>

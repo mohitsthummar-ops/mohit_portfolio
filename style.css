@@ -278,6 +278,33 @@ section {
     max-width: 1100px;
     margin: 0 auto;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    justify-content: space-between;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 0 0 350px;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 40px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+    transition: var(--transition);
+}
+
+.hero-image img:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 50px 120px rgba(0, 0, 0, 0.12);
 }
 
 .hero-top {
