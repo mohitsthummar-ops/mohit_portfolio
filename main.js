@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     $(document).on('mousemove', function(e) {
         // Adjust for body zoom level to keep cursor aligned
-        const zoom = 0.57;
+        const zoom = 0.61;
         const x = e.clientX / zoom;
         const y = e.clientY / zoom;
         

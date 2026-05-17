@@ -34,7 +34,7 @@ body {
     overflow-x: hidden;
     cursor: none;
     font-size: 15px;
-    zoom: 0.57;
+    zoom: 0.61;
     /* Scaled down to match user's 67% zoom preference exactly */
 }
 
