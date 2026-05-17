@@ -4,16 +4,21 @@ $(document).ready(function() {
     const follower = $('.cursor-follower');
 
     $(document).on('mousemove', function(e) {
+        // Adjust for body zoom level to keep cursor aligned
+        const zoom = 0.57;
+        const x = e.clientX / zoom;
+        const y = e.clientY / zoom;
+        
         cursor.css({
-            left: e.clientX,
-            top: e.clientY
+            left: x,
+            top: y
         });
-        setTimeout(function() {
-            follower.css({
-                left: e.clientX - 11,
-                top: e.clientY - 11
-            });
-        }, 80);
+        
+        // Removed setTimeout to fix lagging behavior
+        follower.css({
+            left: x - 11,
+            top: y - 11
+        });
     });
 
     // Cursor interaction
