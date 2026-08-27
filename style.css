@@ -527,6 +527,8 @@ section {
     background: #000;
     color: #FFF;
     border-color: #000;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Skills Bottom Row */
@@ -1046,8 +1048,10 @@ section {
 
 .footer-socials {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-socials a {
