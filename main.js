@@ -1,88 +1,101 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Custom Cursor Logic
-    const cursor = $('.cursor');
-    const follower = $('.cursor-follower');
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
 
-    $(document).on('mousemove', function(e) {
-        // Adjust for body zoom level to keep cursor aligned (zoom is 1 on mobile)
-        const zoom = window.innerWidth > 768 ? 0.61 : 1;
-        const x = e.clientX / zoom;
-        const y = e.clientY / zoom;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let followerX = window.innerWidth / 2;
+    let followerY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-        cursor.css({
-            left: x,
-            top: y
-        });
-        
-        // Removed setTimeout to fix lagging behavior
-        follower.css({
-            left: x - 11,
-            top: y - 11
-        });
+        if (cursor) {
+            cursor.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
+        }
     });
 
+    const animateFollower = () => {
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
+        
+        if (follower) {
+            const isHovered = follower.classList.contains('is-hovered');
+            const scale = isHovered ? 2 : 1;
+            follower.style.transform = `translate3d(${followerX - 15}px, ${followerY - 15}px, 0) scale(${scale})`;
+        }
+        
+        requestAnimationFrame(animateFollower);
+    };
+    animateFollower();
+
     // Cursor interaction
-    $('a, button, .work-card, .process-card, .service-card').on('mouseenter', function() {
-        follower.css({
-            'transform': 'scale(2)',
-            'background': 'rgba(0,0,0,0.02)',
-            'border-color': 'rgba(0,0,0,0.2)'
+    const interactiveElements = document.querySelectorAll('a, button, .work-card, .process-card, .service-card');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            if (follower) {
+                follower.classList.add('is-hovered');
+                follower.style.background = 'rgba(0,0,0,0.02)';
+                follower.style.borderColor = 'rgba(0,0,0,0.2)';
+            }
+            if (cursor) {
+                // Ensure dot scales down, but stays centered (4px is half of 8px)
+                cursor.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0) scale(0.5)`;
+            }
         });
-        cursor.css('transform', 'scale(0.5)');
-    }).on('mouseleave', function() {
-        follower.css({
-            'transform': 'scale(1)',
-            'background': 'transparent',
-            'border-color': '#000'
+        
+        el.addEventListener('mouseleave', () => {
+            if (follower) {
+                follower.classList.remove('is-hovered');
+                follower.style.background = 'transparent';
+                follower.style.borderColor = '#000';
+            }
+            if (cursor) {
+                cursor.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0) scale(1)`;
+            }
         });
-        cursor.css('transform', 'scale(1)');
     });
 
     // Magnetic Elements
-    $('.magnetic').on('mousemove', function(e) {
-        const item = $(this);
-        const rect = item[0].getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
+    const magneticElements = document.querySelectorAll('.magnetic');
+    
+    magneticElements.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            item.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
+        });
         
-        item.css('transform', `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`);
-    }).on('mouseleave', function() {
-        $(this).css('transform', 'translate(0, 0) scale(1)');
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translate(0, 0) scale(1)';
+        });
     });
 
     // Intersection Observer for Reveal Animations
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                $(entry.target).addClass('revealed');
-                // Once revealed, no need to observe anymore
+                entry.target.classList.add('revealed');
                 revealObserver.unobserve(entry.target);
             }
         });
     }, { 
-        threshold: 0.05, // Lower threshold for earlier reveal
-        rootMargin: '0px 0px -50px 0px' // Reveal slightly before it enters fully
+        threshold: 0.05, 
+        rootMargin: '0px 0px -50px 0px' 
     });
 
-    // Apply reveal classes and start observing
-    // Target any element with the 'reveal' class explicitly
-    const targets = $('.reveal, .hero-content > *, .work-card, .skills-container, .process-card, .service-card, .contact-card-v2, .section-header > *');
+    const targets = document.querySelectorAll('.reveal, .hero-content > *, .work-card, .skills-container, .process-card, .service-card, .contact-card-v2, .section-header > *');
     
-    targets.addClass('reveal');
-    targets.each(function() {
-        revealObserver.observe(this);
-    });
-
-    // Smooth scroll for internal links
-    $('a[href^="#"]').on('click', function(e) {
-        e.preventDefault();
-        const target = $(this.getAttribute('href'));
-        if (target.length) {
-            $('html, body').animate({
-                scrollTop: target.offset().top - 100
-            }, 1000, 'swing');
+    targets.forEach(target => {
+        if(!target.classList.contains('reveal')) {
+            target.classList.add('reveal');
         }
+        revealObserver.observe(target);
     });
-
-    // Pulse animation for the status dot is handled by CSS
 });
+

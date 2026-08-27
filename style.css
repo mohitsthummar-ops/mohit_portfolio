@@ -22,7 +22,7 @@
 }
 
 html {
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -30,12 +30,14 @@ body {
     color: var(--text-primary);
     font-family: var(--font-sans);
     line-height: 1.8;
-    /* Increased further for readability at 67% zoom */
     overflow-x: hidden;
-    cursor: none;
     font-size: 15px;
-    zoom: 0.61;
-    /* Scaled down to match user's 67% zoom preference exactly */
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
 }
 
 /* Global Container Scaling */
@@ -117,8 +119,11 @@ section {
     background: var(--accent);
     border-radius: 50%;
     position: fixed;
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 9999;
+    will-change: transform;
 }
 
 .cursor-follower {
@@ -127,9 +132,11 @@ section {
     border: 1px solid var(--accent);
     border-radius: 50%;
     position: fixed;
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 9998;
-    transition: all 0.15s ease-out;
+    will-change: transform;
 }
 
 /* Navigation */
@@ -459,54 +466,164 @@ section {
     margin-top: 64px;
 }
 
-/* Skills Section */
-.skills-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    background: var(--white);
-    padding: 80px;
-    border-radius: 40px;
-    border: 1px solid var(--border);
+/* Skills Section — New Design */
+.skills-header {
+    margin-bottom: 56px;
 }
 
-.skill-tags {
+/* Categorized Skills Grid */
+.skills-categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 60px;
+}
+
+.skill-category {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    transition: var(--transition);
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+.skill-category h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.tech-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 48px;
+    gap: 10px;
 }
 
-.skill-tags span {
-    padding: 8px 20px;
-    background: var(--bg);
+.tech-chips span {
+    font-size: 12px;
+    font-weight: 600;
+    background: #F8F8F8;
+    color: var(--text-secondary);
     border-radius: 100px;
-    font-size: 14px;
-    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
 }
 
-.experience-list {
-    margin-bottom: 48px;
+.tech-chips span:hover {
+    background: #000;
+    color: #FFF;
+    border-color: #000;
 }
 
-.exp-item {
+/* Skills Bottom Row */
+.skills-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 28px;
+    padding: 48px 56px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+/* Experience Timeline */
+.exp-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+}
+
+.exp-track {
     display: flex;
-    justify-content: space-between;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 0;
 }
 
-.exp-info h4 {
-    font-size: 18px;
+.exp-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
 }
 
-.exp-info p {
-    color: var(--text-secondary);
+.exp-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #000;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #000;
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 0.3s, box-shadow 0.3s;
 }
 
-.exp-item .date {
+.exp-node:hover .exp-dot {
+    background: #555;
+    box-shadow: 0 0 0 2px #555, 0 0 16px rgba(0,0,0,0.2);
+}
+
+.exp-connector {
+    width: 0;
+    height: 36px;
+    border-left: 2px dashed rgba(0,0,0,0.25);
+    margin-left: 6px;  /* align with centre of .exp-dot (14px/2 - 1px border) */
+}
+
+.exp-content {
+    padding-bottom: 28px;
+}
+
+.exp-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    background: #000;
+    border-radius: 100px;
+    padding: 3px 10px;
+    margin-bottom: 6px;
+}
+
+.exp-content h4 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.exp-content p {
     color: var(--text-secondary);
     font-size: 14px;
+}
+
+/* Skills CTA */
+.skills-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    text-align: right;
+}
+
+.skills-cta-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 /* Process Section Refinement - Vertical Column */
@@ -1155,7 +1272,6 @@ section {
    ========================================= */
 @media (max-width: 768px) {
     body {
-        zoom: 1; /* Reset zoom on mobile to prevent extreme scaling */
         font-size: 16px;
     }
     
@@ -1209,6 +1325,21 @@ section {
         border-radius: 24px;
     }
 
+    .skills-categories {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-bottom {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 32px 24px;
+    }
+
+    .skills-cta {
+        align-items: flex-start;
+        text-align: left;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -1260,5 +1391,355 @@ section {
     .footer-nav-bullets {
         flex-wrap: wrap;
         gap: 10px;
+    }
+}
+
+/* =========================================
+   Explore All Projects Button
+   ========================================= */
+.explore-all-btn {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.explore-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.explore-all-btn:hover .explore-arrow {
+    transform: translate(3px, -3px);
+}
+
+/* =========================================
+   Projects Modal Overlay
+   ========================================= */
+.projects-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.projects-modal.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.projects-modal.is-open .modal-backdrop {
+    opacity: 1;
+}
+
+.modal-panel {
+    position: relative;
+    background: #fff;
+    border-radius: 40px 40px 0 0;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 56px 60px 80px;
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.15) transparent;
+}
+
+.modal-panel::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal-panel::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+.projects-modal.is-open .modal-panel {
+    transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 56px;
+}
+
+.modal-title {
+    font-size: 42px;
+    margin-top: 8px;
+}
+
+.modal-close-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+    margin-top: 8px;
+    color: #000;
+}
+
+.modal-close-btn:hover {
+    background: #000;
+    color: #fff;
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Modal Cards Grid */
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.modal-card {
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.modal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+}
+
+.modal-card--featured {
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #f0fdf9 0%, #fff 60%);
+}
+
+.modal-img-wrap {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.modal-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-img-wrap.is-mobile-app img {
+    object-fit: contain;
+    padding: 16px;
+}
+
+.modal-card:hover .modal-img-wrap img {
+    transform: scale(1.06);
+}
+
+/* IoT Placeholder Visual */
+.modal-img-wrap.iot-placeholder {
+    background: linear-gradient(135deg, #0d2d1f 0%, #0a3d2e 50%, #063a28 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-img-wrap.iot-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(16,185,129,0.2) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(5,150,105,0.15) 0%, transparent 60%);
+    animation: iotGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes iotGlow {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.iot-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.iot-icon-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid rgba(16,185,129,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+    background: rgba(16,185,129,0.1);
+    animation: iotPulseRing 2s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.4);
+}
+
+@keyframes iotPulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+    70% { box-shadow: 0 0 0 16px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.iot-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: rgba(16,185,129,0.9);
+    text-transform: uppercase;
+}
+
+.iot-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.iot-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(16,185,129,0.7);
+    animation: iotBlink 1.4s ease-in-out infinite;
+}
+
+.iot-dots span:nth-child(2) { animation-delay: 0.2s; }
+.iot-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes iotBlink {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Modal Card Info */
+.modal-card-info {
+    padding: 24px 28px 28px;
+}
+
+.modal-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    background: #f0f0f0;
+    color: #555;
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+}
+
+.modal-tag--iot {
+    background: rgba(16,185,129,0.12);
+    color: #059669;
+}
+
+.modal-card-info h3 {
+    font-size: 20px;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.modal-card-info p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.modal-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1.5px solid rgba(0,0,0,0.15);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.modal-link:hover {
+    opacity: 0.6;
+    border-color: rgba(0,0,0,0.4);
+}
+
+/* IoT Tech Chips */
+.iot-tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.iot-tech-chips span {
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(16,185,129,0.08);
+    color: #059669;
+    border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 100px;
+    padding: 3px 10px;
+}
+
+/* Modal Responsive */
+@media (max-width: 1024px) {
+    .modal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-panel {
+        padding: 36px 24px 60px;
+        border-radius: 28px 28px 0 0;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        margin-bottom: 36px;
+    }
+
+    .modal-title {
+        font-size: 28px;
+    }
+
+    .modal-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
