@@ -708,8 +708,9 @@
             let followerY = window.innerHeight / 2;
 
             document.addEventListener('mousemove', e => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+                const zoom = window.innerWidth >= 1024 ? 0.85 : 1;
+                mouseX = e.clientX / zoom;
+                mouseY = e.clientY / zoom;
                 if(cur) cur.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
             });
 

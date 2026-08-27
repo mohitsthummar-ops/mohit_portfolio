@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let followerY = window.innerHeight / 2;
 
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        const zoom = window.innerWidth >= 1024 ? 0.85 : 1;
+        mouseX = e.clientX / zoom;
+        mouseY = e.clientY / zoom;
         
         if (cursor) {
             cursor.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
@@ -64,9 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     magneticElements.forEach(item => {
         item.addEventListener('mousemove', (e) => {
+            const zoom = window.innerWidth >= 1024 ? 0.85 : 1;
             const rect = item.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+            const x = (e.clientX / zoom) - (rect.left / zoom) - (rect.width / zoom) / 2;
+            const y = (e.clientY / zoom) - (rect.top / zoom) - (rect.height / zoom) / 2;
             
             item.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
         });
